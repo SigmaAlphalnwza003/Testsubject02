@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Touhou Style Calculator</title>
+<title>Reimu Calculator</title>
 
 <style>
 *{
@@ -14,56 +14,78 @@
 }
 
 body{
-    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    min-height:100vh;
     background:
-    radial-gradient(circle at 20% 20%, #ff80c0 0%, transparent 25%),
-    radial-gradient(circle at 80% 30%, #80dfff 0%, transparent 25%),
-    radial-gradient(circle at 50% 80%, #d080ff 0%, transparent 30%),
-    linear-gradient(135deg,#1b1235,#2d1f5a,#3f2a73);
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.15) 0%, transparent 20%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,.1) 0%, transparent 20%),
+    linear-gradient(135deg,#b80000,#ff4040);
     overflow:hidden;
 }
 
+/* โบว์พื้นหลัง */
 body::before{
-    content:"✦ ✧ ✦ ✧ ✦ ✧ ✦";
+    content:"🎀";
     position:absolute;
-    font-size:120px;
-    color:rgba(255,255,255,0.08);
+    font-size:260px;
+    opacity:0.08;
     transform:rotate(-15deg);
 }
 
-.calculator{
-    width:340px;
-    padding:20px;
-    border-radius:25px;
-    background:rgba(255,255,255,0.12);
-    backdrop-filter:blur(12px);
-    border:2px solid rgba(255,255,255,0.2);
-    box-shadow:0 0 30px rgba(255,100,200,0.4);
+/* เครื่องราง */
+body::after{
+    content:"札 札 札 札 札";
+    position:absolute;
+    top:5%;
+    left:5%;
+    color:rgba(255,255,255,0.08);
+    font-size:60px;
+    letter-spacing:25px;
+    transform:rotate(-20deg);
 }
 
-.title{
+.calculator{
+    width:360px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(12px);
+    border:3px solid rgba(255,255,255,0.3);
+    border-radius:25px;
+    padding:20px;
+    box-shadow:
+        0 0 25px rgba(255,255,255,0.3),
+        0 0 50px rgba(255,80,80,0.4);
+}
+
+.header{
     text-align:center;
     color:white;
-    font-size:1.4rem;
     margin-bottom:15px;
-    text-shadow:0 0 10px #ff7bd5;
+}
+
+.header h1{
+    font-size:1.6rem;
+    text-shadow:0 0 10px white;
+}
+
+.header p{
+    opacity:.8;
+    font-size:.9rem;
 }
 
 .display{
     width:100%;
-    height:70px;
+    height:75px;
     border:none;
-    outline:none;
     border-radius:15px;
-    padding:10px;
+    padding:15px;
     font-size:2rem;
     text-align:right;
-    color:white;
-    background:rgba(0,0,0,0.3);
+    background:white;
+    color:#b80000;
     margin-bottom:15px;
+    font-weight:bold;
 }
 
 .buttons{
@@ -78,27 +100,33 @@ button{
     border-radius:15px;
     font-size:1.2rem;
     cursor:pointer;
-    color:white;
-    background:rgba(255,255,255,0.12);
-    transition:0.2s;
+    transition:.2s;
+    font-weight:bold;
 }
 
 button:hover{
     transform:translateY(-3px);
-    box-shadow:0 0 15px rgba(255,255,255,0.4);
 }
 
-.operator{
-    background:linear-gradient(135deg,#ff6bb3,#ff4d8d);
+.num{
+    background:white;
+    color:#b80000;
+}
+
+.op{
+    background:#ffdddd;
+    color:#b80000;
 }
 
 .equal{
-    background:linear-gradient(135deg,#6ad6ff,#4da6ff);
+    background:#ffd700;
+    color:#8a0000;
     grid-column:span 2;
 }
 
 .clear{
-    background:linear-gradient(135deg,#ff8a8a,#ff4d4d);
+    background:#8a0000;
+    color:white;
 }
 
 .zero{
@@ -106,55 +134,61 @@ button:hover{
 }
 
 .footer{
-    text-align:center;
-    color:#ddd;
     margin-top:12px;
-    font-size:0.8rem;
+    text-align:center;
+    color:white;
+    opacity:.8;
+    font-size:.8rem;
 }
 </style>
 </head>
 <body>
 
 <div class="calculator">
-    <div class="title">✨ Touhou Style Calculator ✨</div>
 
-    <input type="text" class="display" id="display" readonly>
+    <div class="header">
+        <h1>🎀 Reimu Calculator 🎀</h1>
+        <p>Hakurei Shrine Edition</p>
+    </div>
+
+    <input id="display" class="display" readonly>
 
     <div class="buttons">
         <button class="clear" onclick="clearDisplay()">C</button>
-        <button onclick="append('/')">÷</button>
-        <button onclick="append('*')">×</button>
-        <button class="operator" onclick="append('-')">−</button>
+        <button class="op" onclick="append('/')">÷</button>
+        <button class="op" onclick="append('*')">×</button>
+        <button class="op" onclick="append('-')">−</button>
 
-        <button onclick="append('7')">7</button>
-        <button onclick="append('8')">8</button>
-        <button onclick="append('9')">9</button>
-        <button class="operator" onclick="append('+')">+</button>
+        <button class="num" onclick="append('7')">7</button>
+        <button class="num" onclick="append('8')">8</button>
+        <button class="num" onclick="append('9')">9</button>
+        <button class="op" onclick="append('+')">+</button>
 
-        <button onclick="append('4')">4</button>
-        <button onclick="append('5')">5</button>
-        <button onclick="append('6')">6</button>
-        <button onclick="append('.')">.</button>
+        <button class="num" onclick="append('4')">4</button>
+        <button class="num" onclick="append('5')">5</button>
+        <button class="num" onclick="append('6')">6</button>
+        <button class="num" onclick="append('.')">.</button>
 
-        <button onclick="append('1')">1</button>
-        <button onclick="append('2')">2</button>
-        <button onclick="append('3')">3</button>
-        <button onclick="backspace()">⌫</button>
+        <button class="num" onclick="append('1')">1</button>
+        <button class="num" onclick="append('2')">2</button>
+        <button class="num" onclick="append('3')">3</button>
+        <button class="op" onclick="backspace()">⌫</button>
 
-        <button class="zero" onclick="append('0')">0</button>
+        <button class="num zero" onclick="append('0')">0</button>
         <button class="equal" onclick="calculate()">=</button>
     </div>
 
     <div class="footer">
-        🌸 Inspired by Touhou Project 🌸
+        ✨ Fantasy Nature Calculator ✨
     </div>
+
 </div>
 
 <script>
 const display = document.getElementById("display");
 
-function append(value){
-    display.value += value;
+function append(v){
+    display.value += v;
 }
 
 function clearDisplay(){
