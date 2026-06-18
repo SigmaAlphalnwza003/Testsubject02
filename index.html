@@ -1,10 +1,178 @@
-<html>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-   <title>
-     Marisa kirisame
-   </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Touhou Style Calculator</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    radial-gradient(circle at 20% 20%, #ff80c0 0%, transparent 25%),
+    radial-gradient(circle at 80% 30%, #80dfff 0%, transparent 25%),
+    radial-gradient(circle at 50% 80%, #d080ff 0%, transparent 30%),
+    linear-gradient(135deg,#1b1235,#2d1f5a,#3f2a73);
+    overflow:hidden;
+}
+
+body::before{
+    content:"✦ ✧ ✦ ✧ ✦ ✧ ✦";
+    position:absolute;
+    font-size:120px;
+    color:rgba(255,255,255,0.08);
+    transform:rotate(-15deg);
+}
+
+.calculator{
+    width:340px;
+    padding:20px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(12px);
+    border:2px solid rgba(255,255,255,0.2);
+    box-shadow:0 0 30px rgba(255,100,200,0.4);
+}
+
+.title{
+    text-align:center;
+    color:white;
+    font-size:1.4rem;
+    margin-bottom:15px;
+    text-shadow:0 0 10px #ff7bd5;
+}
+
+.display{
+    width:100%;
+    height:70px;
+    border:none;
+    outline:none;
+    border-radius:15px;
+    padding:10px;
+    font-size:2rem;
+    text-align:right;
+    color:white;
+    background:rgba(0,0,0,0.3);
+    margin-bottom:15px;
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+button{
+    height:60px;
+    border:none;
+    border-radius:15px;
+    font-size:1.2rem;
+    cursor:pointer;
+    color:white;
+    background:rgba(255,255,255,0.12);
+    transition:0.2s;
+}
+
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 15px rgba(255,255,255,0.4);
+}
+
+.operator{
+    background:linear-gradient(135deg,#ff6bb3,#ff4d8d);
+}
+
+.equal{
+    background:linear-gradient(135deg,#6ad6ff,#4da6ff);
+    grid-column:span 2;
+}
+
+.clear{
+    background:linear-gradient(135deg,#ff8a8a,#ff4d4d);
+}
+
+.zero{
+    grid-column:span 2;
+}
+
+.footer{
+    text-align:center;
+    color:#ddd;
+    margin-top:12px;
+    font-size:0.8rem;
+}
+</style>
 </head>
-  <body>
-    hello world
-  </body>
+<body>
+
+<div class="calculator">
+    <div class="title">✨ Touhou Style Calculator ✨</div>
+
+    <input type="text" class="display" id="display" readonly>
+
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button onclick="append('/')">÷</button>
+        <button onclick="append('*')">×</button>
+        <button class="operator" onclick="append('-')">−</button>
+
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button class="operator" onclick="append('+')">+</button>
+
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button onclick="append('.')">.</button>
+
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button onclick="backspace()">⌫</button>
+
+        <button class="zero" onclick="append('0')">0</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+
+    <div class="footer">
+        🌸 Inspired by Touhou Project 🌸
+    </div>
+</div>
+
+<script>
+const display = document.getElementById("display");
+
+function append(value){
+    display.value += value;
+}
+
+function clearDisplay(){
+    display.value = "";
+}
+
+function backspace(){
+    display.value = display.value.slice(0,-1);
+}
+
+function calculate(){
+    try{
+        display.value = eval(display.value);
+    }catch{
+        display.value = "Error";
+    }
+}
+</script>
+
+</body>
 </html>
