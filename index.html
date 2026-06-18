@@ -1,213 +1,29 @@
-<!DOCTYPE html>
-<html lang="th">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reimu Calculator</title>
-
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Segoe UI",sans-serif;
+body {
+    text-align: center;
+    font-family: Arial;
 }
 
-body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,.15) 0%, transparent 20%),
-    radial-gradient(circle at 80% 80%, rgba(255,255,255,.1) 0%, transparent 20%),
-    linear-gradient(135deg,#b80000,#ff4040);
-    overflow:hidden;
-}
-
-/* โบว์พื้นหลัง */
-body::before{
-    content:"🎀";
-    position:absolute;
-    font-size:260px;
-    opacity:0.08;
-    transform:rotate(-15deg);
-}
-
-/* เครื่องราง */
-body::after{
-    content:"札 札 札 札 札";
-    position:absolute;
-    top:5%;
-    left:5%;
-    color:rgba(255,255,255,0.08);
-    font-size:60px;
-    letter-spacing:25px;
-    transform:rotate(-20deg);
-}
-
-.calculator{
-    width:360px;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(12px);
-    border:3px solid rgba(255,255,255,0.3);
-    border-radius:25px;
-    padding:20px;
-    box-shadow:
-        0 0 25px rgba(255,255,255,0.3),
-        0 0 50px rgba(255,80,80,0.4);
-}
-
-.header{
-    text-align:center;
-    color:white;
-    margin-bottom:15px;
-}
-
-.header h1{
-    font-size:1.6rem;
-    text-shadow:0 0 10px white;
-}
-
-.header p{
-    opacity:.8;
-    font-size:.9rem;
-}
-
-.display{
-    width:100%;
-    height:75px;
-    border:none;
-    border-radius:15px;
-    padding:15px;
-    font-size:2rem;
-    text-align:right;
-    background:white;
-    color:#b80000;
-    margin-bottom:15px;
-    font-weight:bold;
-}
-
-.buttons{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-}
-
-button{
-    height:60px;
-    border:none;
-    border-radius:15px;
-    font-size:1.2rem;
-    cursor:pointer;
-    transition:.2s;
-    font-weight:bold;
-}
-
-button:hover{
-    transform:translateY(-3px);
-}
-
-.num{
-    background:white;
-    color:#b80000;
-}
-
-.op{
-    background:#ffdddd;
-    color:#b80000;
-}
-
-.equal{
-    background:#ffd700;
-    color:#8a0000;
-    grid-column:span 2;
-}
-
-.clear{
-    background:#8a0000;
-    color:white;
-}
-
-.zero{
-    grid-column:span 2;
-}
-
-.footer{
-    margin-top:12px;
-    text-align:center;
-    color:white;
-    opacity:.8;
-    font-size:.8rem;
-}
+buton {
+    padding: 10px 20px;
+    }
 </style>
 </head>
-<body>
+</html>
 
-<div class="calculator">
+<h1>เว็บตัวอย่าง</h1>
 
-    <div class="header">
-        <h1>🎀 Reimu Calculator 🎀</h1>
-        <p>Hakurei Shrine Edition</p>
-    </div>
-
-    <input id="display" class="display" readonly>
-
-    <div class="buttons">
-        <button class="clear" onclick="clearDisplay()">C</button>
-        <button class="op" onclick="append('/')">÷</button>
-        <button class="op" onclick="append('*')">×</button>
-        <button class="op" onclick="append('-')">−</button>
-
-        <button class="num" onclick="append('7')">7</button>
-        <button class="num" onclick="append('8')">8</button>
-        <button class="num" onclick="append('9')">9</button>
-        <button class="op" onclick="append('+')">+</button>
-
-        <button class="num" onclick="append('4')">4</button>
-        <button class="num" onclick="append('5')">5</button>
-        <button class="num" onclick="append('6')">6</button>
-        <button class="num" onclick="append('.')">.</button>
-
-        <button class="num" onclick="append('1')">1</button>
-        <button class="num" onclick="append('2')">2</button>
-        <button class="num" onclick="append('3')">3</button>
-        <button class="op" onclick="backspace()">⌫</button>
-
-        <button class="num zero" onclick="append('0')">0</button>
-        <button class="equal" onclick="calculate()">=</button>
-    </div>
-
-    <div class="footer">
-        ✨ Fantasy Nature Calculator ✨
-    </div>
-
-</div>
+<button onclick="Sayhello()">
+กดที่นี่สิไอตูด
+</button>
 
 <script>
-const display = document.getElementById("display");
-
-function append(v){
-    display.value += v;
-}
-
-function clearDisplay(){
-    display.value = "";
-}
-
-function backspace(){
-    display.value = display.value.slice(0,-1);
-}
-
-function calculate(){
-    try{
-        display.value = eval(display.value);
-    }catch{
-        display.value = "Error";
-    }
+function sayHello() {
+    alert("หวัดดีไอหน้าตูดดด!");
 }
 </script>
 
 </body>
 </html>
-
